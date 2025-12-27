@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rawlinson Handy Man</title>
+    <title>Rawlinson Handyman Services - Your Trusted Local Expert</title>
     <style>
         * {
             margin: 0;
@@ -18,10 +18,13 @@
         }
 
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #d35400 0%, #e67e22 50%, #f39c12 100%);
             color: white;
-            padding: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .container {
@@ -34,13 +37,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "🔧";
+            font-size: 2rem;
         }
 
         nav ul {
@@ -52,38 +61,129 @@
         nav a {
             color: white;
             text-decoration: none;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
         }
 
         nav a:hover {
-            opacity: 0.8;
+            transform: translateY(-2px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero {
+            background: linear-gradient(135deg, rgba(211,84,0,0.95) 0%, rgba(230,126,34,0.9) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f39c12" width="1200" height="600"/><g fill="%23d35400" opacity="0.1"><circle cx="100" cy="100" r="80"/><circle cx="400" cy="300" r="120"/><circle cx="800" cy="150" r="100"/><circle cx="1000" cy="400" r="90"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
             text-align: center;
-            padding: 3rem 0;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .hero .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .services {
-            padding: 4rem 0;
+        .hero .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #d35400;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
             background: #f8f9fa;
         }
 
-        .services h2 {
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #d35400;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .trust-badges {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
             text-align: center;
-            font-size: 2rem;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            font-size: 1rem;
+        }
+
+        .badge-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .services {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #d35400;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
             margin-bottom: 3rem;
-            color: #1e3c72;
         }
 
         .service-grid {
@@ -94,79 +194,206 @@
 
         .service-card {
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-top: 4px solid #e67e22;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(230,126,34,0.05) 0%, rgba(243,156,18,0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(211,84,0,0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
         }
 
         .service-card h3 {
-            color: #2a5298;
+            color: #d35400;
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
-        .about {
-            padding: 4rem 0;
+        .service-card ul {
+            list-style: none;
+            margin-top: 1rem;
         }
 
-        .about h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #1e3c72;
+        .service-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        .about p {
-            font-size: 1.1rem;
+        .service-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .why-choose {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: #f8f9fa;
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            max-width: 800px;
+            display: block;
         }
 
-        .contact {
-            padding: 4rem 0;
-            background: #1e3c72;
+        .feature h3 {
+            color: #d35400;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .testimonials {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
             color: white;
         }
 
-        .contact h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .contact-item {
-            text-align: center;
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
-        .contact-item h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #1e3c72;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 5px;
+        .testimonial-author {
             font-weight: bold;
-            margin-top: 1rem;
-            transition: background 0.3s;
+            text-align: right;
         }
 
-        .cta-button:hover {
-            background: #f0f0f0;
+        .stars {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+
+        .contact {
+            padding: 5rem 0;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .contact-card:hover {
+            border-color: #e67e22;
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #f39c12;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: #f39c12;
+        }
+
+        .cta-section {
+            background: #f39c12;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
         }
 
         footer {
@@ -176,9 +403,17 @@
             padding: 2rem 0;
         }
 
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             nav ul {
-                flex-direction: column;
                 gap: 1rem;
             }
 
@@ -186,9 +421,32 @@
                 font-size: 2rem;
             }
 
-            .contact-info {
-                flex-direction: column;
-                gap: 2rem;
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
             }
         }
     </style>
@@ -197,82 +455,239 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">Rawlinson Baths</div>
+                <div class="logo">Rawlinson Handyman</div>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#why-us">Why Choose Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="hero">
-                <h1>Transform Your Bathroom</h1>
-                <p>Expert bathroom design, installation, and renovation services</p>
-            </div>
         </div>
     </header>
 
-    <section id="services" class="services">
+    <section id="home" class="hero">
         <div class="container">
-            <h2>Our Services</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3>Bathroom Design</h3>
-                    <p>Professional design consultation to create your perfect bathroom space with style and functionality.</p>
+            <h1>🏠 Your Local Handyman Expert</h1>
+            <p class="tagline">Bathrooms • Tiling • Plumbing • Landscaping</p>
+            <div class="cta-buttons">
+                <a href="tel:07912775261" class="cta-button pulse">📞 Call Now: 07912 775261</a>
+                <a href="mailto:flanshaw@gmail.com" class="cta-button secondary">✉️ Get a Free Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-badges">
+        <div class="container">
+            <div class="badges-grid">
+                <div class="badge">
+                    <span class="badge-icon">⭐</span>
+                    <strong>5-Star Rated</strong>
+                    <p>Exceptional Customer Service</p>
                 </div>
-                <div class="service-card">
-                    <h3>Full Installation</h3>
-                    <p>Complete bathroom installation services including plumbing, tiling, and fitting to the highest standards.</p>
+                <div class="badge">
+                    <span class="badge-icon">🛡️</span>
+                    <strong>Fully Insured</strong>
+                    <p>Peace of Mind Guaranteed</p>
                 </div>
-                <div class="service-card">
-                    <h3>Renovation</h3>
-                    <p>Transform your existing bathroom with our expert renovation services, from minor updates to complete overhauls.</p>
+                <div class="badge">
+                    <span class="badge-icon">💰</span>
+                    <strong>Fair Pricing</strong>
+                    <p>No Hidden Costs</p>
                 </div>
-                <div class="service-card">
-                    <h3>Wet Rooms</h3>
-                    <p>Specialist wet room design and installation for modern, accessible bathroom solutions.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Luxury Fittings</h3>
-                    <p>Premium bathroom fixtures and fittings from leading brands to suit any budget and style.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Maintenance</h3>
-                    <p>Ongoing maintenance and repair services to keep your bathroom in perfect condition.</p>
+                <div class="badge">
+                    <span class="badge-icon">⚡</span>
+                    <strong>Quick Response</strong>
+                    <p>Same Day Service Available</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="services" class="services">
         <div class="container">
-            <h2>About Rawlinson Handyman</h2>
-            <p>Over two decades of handman experience</p>
+            <h2 class="section-title">Expert Services Tailored to You</h2>
+            <p class="section-subtitle">From small repairs to complete renovations, we've got you covered</p>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <span class="service-icon">🚿</span>
+                    <h3>Bathroom Specialists</h3>
+                    <p>Transform your bathroom into a sanctuary with our expert renovation services.</p>
+                    <ul>
+                        <li>Complete bathroom installations</li>
+                        <li>Shower and bath replacements</li>
+                        <li>Wet room conversions</li>
+                        <li>Bathroom refurbishments</li>
+                        <li>Fixture upgrades</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🔲</span>
+                    <h3>Professional Tiling</h3>
+                    <p>Beautiful, precise tiling work that stands the test of time.</p>
+                    <ul>
+                        <li>Wall & floor tiling</li>
+                        <li>Kitchen splashbacks</li>
+                        <li>Bathroom tiling</li>
+                        <li>Tile repairs & replacement</li>
+                        <li>Mosaic & feature walls</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🔧</span>
+                    <h3>Plumbing Services</h3>
+                    <p>Reliable plumbing solutions for all your needs, big or small.</p>
+                    <ul>
+                        <li>Leak repairs</li>
+                        <li>Tap installations & repairs</li>
+                        <li>Toilet installations</li>
+                        <li>Radiator fitting</li>
+                        <li>Pipe work & drainage</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🌳</span>
+                    <h3>Landscaping</h3>
+                    <p>Create your dream outdoor space with our landscaping expertise.</p>
+                    <ul>
+                        <li>Patio installation</li>
+                        <li>Decking & fencing</li>
+                        <li>Garden transformations</li>
+                        <li>Driveway repairs</li>
+                        <li>Outdoor lighting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose Rawlinson Handyman?</h2>
+            <p class="section-subtitle">Quality workmanship you can trust</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <span class="feature-icon">👨‍🔧</span>
+                    <h3>Expert Craftsman</h3>
+                    <p>Years of experience delivering quality results across all trades</p>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">💬</span>
+                    <h3>Clear Communication</h3>
+                    <p>We keep you informed every step of the way, no jargon, no surprises</p>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Attention to Detail</h3>
+                    <p>Every job is finished to the highest standard, no matter how big or small</p>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">🤝</span>
+                    <h3>Reliable & Trustworthy</h3>
+                    <p>We turn up on time, respect your home, and deliver what we promise</p>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">✅</span>
+                    <h3>Guaranteed Work</h3>
+                    <p>All work is guaranteed - we stand behind our craftsmanship</p>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon">📱</span>
+                    <h3>Easy Booking</h3>
+                    <p>Simple, straightforward booking process with flexible scheduling</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">What Our Customers Say</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Don't just take our word for it</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Absolutely brilliant service! Our bathroom looks amazing. Professional, tidy, and finished on time. Highly recommend!"</p>
+                    <p class="testimonial-author">- Sarah M., Sheffield</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Great communication and fantastic workmanship. Fixed our plumbing issues quickly and the tiling work is perfect. Will definitely use again."</p>
+                    <p class="testimonial-author">- John D., Rotherham</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Transformed our garden completely. The patio looks stunning and the price was very reasonable. Couldn't be happier!"</p>
+                    <p class="testimonial-author">- Emma R., Barnsley</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Get in touch today for a free, no-obligation quote</p>
+            <div class="cta-buttons">
+                <a href="tel:07912775261" class="cta-button">Call Now: 07912 775261</a>
+                <a href="mailto:flanshaw@gmail.com" class="cta-button secondary">Email Us</a>
+            </div>
         </div>
     </section>
 
     <section id="contact" class="contact">
         <div class="container">
-            <h2>Get In Touch</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h3>Phone</h3>
-                    <p>07912775261</p>
+            <h2 class="section-title" style="color: white;">Get In Touch</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">We're here to help with your home improvement needs</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="contact-icon">📞</span>
+                    <h3>Call Us</h3>
+                    <a href="tel:07912775261">07912 775261</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Available 7 days a week</p>
                 </div>
-                <div class="contact-item">
-                    <h3>Email</h3>
-                    <p>flanshaw@gmail.com</p>
+
+                <div class="contact-card">
+                    <span class="contact-icon">✉️</span>
+                    <h3>Email Us</h3>
+                    <a href="mailto:flanshaw@gmail.com">flanshaw@gmail.com</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">We'll respond within 24 hours</p>
                 </div>
-                
-            </div>
-            <div style="text-align: center;">
-                <a href="#contact" class="cta-button">Request a Quote</a>
+
+                <div class="contact-card">
+                    <span class="contact-icon">🌐</span>
+                    <h3>Visit Our Website</h3>
+                    <a href="https://flanshaw.github.io/Handyman" target="_blank">flanshaw.github.io/Handyman</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">View our portfolio & services</p>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-    
+        <div class="container">
+            <p>&copy; 2024 Rawlinson Handyman Services. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Professional handyman services across South Yorkshire and surrounding areas</p>
+            <p style="margin-top: 1rem;">
+                <a href="tel:07912775261">07912 775261</a> | 
+                <a href="mailto:flanshaw@gmail.com">flanshaw@gmail.com</a> | 
+                <a href="https://flanshaw.github.io/Handyman" target="_blank">flanshaw.github.io/Handyman</a>
+            </p>
+        </div>
     </footer>
 </body>
 </html>
